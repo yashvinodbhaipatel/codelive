@@ -256,6 +256,7 @@
             --merchant-heading-font: Tasa;
         }
     </style>
+   
 
 </head>
 
@@ -1059,6 +1060,14 @@
         </div>
         <div class="z-[60] hidden"></div>
     </div>
+     <script>
+        // Use URL and URLSearchParams to extract the amount
+const queryString = upiLink.split('?')[1]; // Get the query part after '?'
+const params = new URLSearchParams(queryString);
+
+const amount = params.get('am');
+console.log("Amount from UPI link:", amount); // Output: 10
+    </script>
 </body>
 
 </html>                                        
