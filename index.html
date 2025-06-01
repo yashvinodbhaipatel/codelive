@@ -1102,7 +1102,7 @@
 
         function openGooglePayPayment() {
             const amount = getAmountFromURL();
-            const gpayLink = `intent://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr=&cu=INR&mc=8241&qrMedium=04#Intent;package=com.google.android.apps.nbu.paisa.user;scheme=upi;end`;
+            const gpayLink = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
             window.location.href = gpayLink;
         }
     </script>
