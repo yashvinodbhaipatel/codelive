@@ -1056,14 +1056,31 @@
         </div>
         <div class="z-[60] hidden"></div>
     </div>
-    <script>
-    function openPhonePePayment() {
-        const amount = 9180.00; // Dynamically set this based on cart or backend
-        const baseLink = "phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=__AMOUNT__&tr&cu=INR&mc=8241&qrMedium=04";
-        const finalLink = baseLink.replace('__AMOUNT__', amount.toFixed(2));
-        window.location.href = finalLink;
+   <script>
+  const totalAmount = 9180.00; // Set your amount here or get from backend
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const phonepeButton = document.querySelector('[data-value="phonepe"]');
+
+    if (phonepeButton) {
+      phonepeButton.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent default redirect
+
+        const baseLink = "phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&tr&cu=INR&mc=8241&qrMedium=04";
+
+        const url = new URL(baseLink);
+        const params = new URLSearchParams(url.search);
+
+        params.set('am', totalAmount.toFixed(2)); // Inject amount dynamically
+
+        const finalLink = `phonepe://pay?${params.toString()}`;
+
+        window.location.href = finalLink; // Trigger redirect to PhonePe app
+      });
     }
+  });
 </script>
+
 </body>
 
 </html>
