@@ -1107,23 +1107,25 @@
         }
     </script>
    <script>
-  // Get amount from URL like ?amount=150.25
   function getAmountFromURL() {
     const params = new URLSearchParams(window.location.search);
     const amount = params.get("amount");
     return amount ? parseFloat(amount).toFixed(2) : "0.00";
   }
 
-  // Set .digit value from URL on page load
-  document.addEventListener("DOMContentLoaded", function () {
-    const amount = getAmountFromURL();
+  function setAmountWhenReady() {
     const digitDiv = document.querySelector(".digit");
     if (digitDiv) {
+      const amount = getAmountFromURL();
       digitDiv.textContent = amount;
+    } else {
+      // Retry every 100ms until .digit is available
+      setTimeout(setAmountWhenReady, 100);
     }
-  });
+  }
 
-  // Open UPI app with amount from .digit
+  document.addEventListener("DOMContentLoaded", setAmountWhenReady);
+
   function openGooglePayPayment() {
     const digitDiv = document.querySelector(".digit");
     if (!digitDiv) return alert("Amount not found.");
@@ -1138,6 +1140,7 @@
     window.location.href = upiLink;
   }
 </script>
+
 
 
 
