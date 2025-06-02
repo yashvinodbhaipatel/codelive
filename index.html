@@ -1054,10 +1054,7 @@
       labelSpan.textContent = amount;
     }
 
-    // Retry if elements not found
-    if (!digitDiv || !labelSpan) {
-      setTimeout(setAmountInUI, 100);
-    }
+    
   }
 
   window.addEventListener("DOMContentLoaded", setAmountInUI);
