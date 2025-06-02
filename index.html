@@ -923,12 +923,11 @@
                                             <div class="char-sprtr" style="display: inline-block;">₹</div>
 
                                             <div class="ctnr ctnr1"
-                                                style="position: relative; display: inline-block; vertical-align: top; transform: translateY(-20px);">
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: auto;">
-                                                </div>
-
-                                            </div>
+     style="position: relative; display: inline-block; vertical-align: top; transform: translateY(-20px);">
+  <div class="digit"
+       style="display: flex; justify-content: center; user-select: auto;">
+  </div>
+</div>
                                         </div>
 
                                         <div class="inset-0 hidden">₹100</div>
@@ -1031,28 +1030,29 @@
         }
     </script>
 
-    <script>
-        function getAmountFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            const amount = params.get("amount");
-            console.log("Raw amount from URL param:", amount);
-            return amount ? parseFloat(amount).toFixed(2) : "0.00";
-        }
+   <script>
+  function getAmountFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const amount = params.get("amount");
+    console.log("Raw amount from URL param:", amount);
+    return amount ? parseFloat(amount).toFixed(2) : "0.00";
+  }
 
-        function setAmountInDigit() {
-            const digitDiv = document.querySelector(".digit");
-            if (digitDiv) {
-                const amount = getAmountFromURL();
-                console.log("Setting amount in .digit:", amount);
-                digitDiv.textContent = amount;
-            } else {
-                console.warn(".digit element not found, retrying...");
-                setTimeout(setAmountInDigit, 100);
-            }
-        }
+  function setAmountInDigit() {
+    const digitDiv = document.querySelector(".digit");
+    if (digitDiv) {
+      const amount = getAmountFromURL();
+      console.log("Setting amount in .digit:", amount);
+      digitDiv.textContent = amount;
+    } else {
+      console.warn(".digit element not found, retrying...");
+      setTimeout(setAmountInDigit, 100); // retry until element exists
+    }
+  }
 
-        window.addEventListener("load", setAmountInDigit);
-    </script>
+  // Ensure DOM is fully loaded
+  window.addEventListener("DOMContentLoaded", setAmountInDigit);
+</script>
 
 
 
