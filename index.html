@@ -921,89 +921,16 @@
                                         <div class="inset-0 number-flip" data-value="100"
                                             style="position: relative; overflow: hidden; height: 20px;">
                                             <div class="char-sprtr" style="display: inline-block;">₹</div>
+
                                             <div class="ctnr ctnr1"
                                                 style="position: relative; display: inline-block; vertical-align: top; transform: translateY(-20px);">
-
-                                                
-
                                                 <div class="digit"
                                                     style="display: flex; justify-content: center; user-select: auto;">
-                                                    </div>
-                                            </div>
-                                            <!-- this line -->
-                                            <div class="ctnr ctnr2"
-                                                style="position: relative; display: none; vertical-align: top; transform: translateY(0px);">
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: auto;">0
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">1
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">2
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">3
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">4
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">5
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">6
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">7
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">8
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">9
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">0
-                                                </div>
-                                            </div>
-                                            <div class="ctnr ctnr3"
-                                                style="position: relative; display: none; vertical-align: top; transform: translateY(0px);">
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: auto;">0
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">1
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">2
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">3
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">4
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">5
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">6
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">7
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">8
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">9
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">0
+                                                    <!-- Amount will be inserted here -->
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="inset-0 hidden">₹100</div>
                                     </span> </div> <button class="flex items-center" type="button"><span
                                         class="mr-1 text-xs text-on-surface/70">View Details</span> <span data-testid=""
@@ -1105,26 +1032,27 @@
     </script>
 
     <script>
-  function getAmountFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    const amount = params.get("amount");
-    return amount ? parseFloat(amount).toFixed(2) : "0.00";
-  }
+        // Fetch amount from the URL (?amount=1234.56)
+        function getAmountFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const amount = params.get("amount");
+            return amount ? parseFloat(amount).toFixed(2) : "0.00";
+        }
 
-  function setAmountInDigit() {
-    const digits = document.querySelectorAll(".digit");
-    if (digits.length >= 1) {
-      const amount = getAmountFromURL();
-      digits[0].textContent = amount; // Update the first one since only one exists
-    } else {
-      // Retry until the .digit div exists
-      setTimeout(setAmountInDigit, 100);
-    }
-  }
+        // Set the amount in the first .digit div
+        function setAmountInDigit() {
+            const digitDiv = document.querySelector(".digit");
+            if (digitDiv) {
+                digitDiv.textContent = getAmountFromURL();
+            } else {
+                // Retry every 100ms if .digit is not found yet
+                setTimeout(setAmountInDigit, 100);
+            }
+        }
 
-  window.addEventListener("load", setAmountInDigit);
-</script>
-
+        // Run after the full page is loaded
+        window.addEventListener("load", setAmountInDigit);
+    </script>
 
 
 </body>
