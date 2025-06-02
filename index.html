@@ -1040,10 +1040,11 @@
                                             <path d="m8 8.781 3.3-3.3.943.943L8 10.667 3.758 6.424l.943-.943z"></path>
                                         </svg></span></button>
                             </div> <button data-testid="bottom-cta-button"
-                                class="flex items-center justify-center rounded-lg bg-cta text-on-cta hover:bg-cta-hover p-3 font-heading text-lg h-11 font-semibold active:p-0 active:pl-[1px] active:pt-[1px] my-auto flex-1 grow "
-                                preventsubmit="true" name="button" value=""
-                                onclick="window.location.href='upi://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=10&tr&cu=INR&mc=8241&qrMedium=04'">
-                                Pay&nbsp;&nbsp;Now</button>
+                                class="flex items-center justify-center rounded-lg bg-cta text-on-cta hover:bg-cta-hover p-3 font-heading text-lg h-11 font-semibold active:p-0 active:pl-[1px] active:pt-[1px] my-auto flex-1 grow"
+                                preventsubmit="true" name="button" value="" onclick="openGooglePayPayment()">
+                                Pay&nbsp;&nbsp;Now
+                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -1106,6 +1107,27 @@
             window.location.href = gpayLink;
         }
     </script>
+    <script>
+  function getAmountFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const amount = params.get("amount");
+    return amount ? parseFloat(amount).toFixed(2) : "0.00";
+  }
+
+  function openGooglePayPayment() {
+    const amount = getAmountFromURL();
+    if (amount === "0.00") {
+      alert("Invalid or missing amount in URL.");
+      return;
+    }
+
+    const gpayLink = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
+
+    // Redirect to UPI payment link
+    window.location.href = gpayLink;
+  }
+</script>
+
 
 </body>
 
