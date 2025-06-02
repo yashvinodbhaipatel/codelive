@@ -926,8 +926,8 @@
                                                 style="position: relative; display: inline-block; vertical-align: top; transform: translateY(-20px);">
                                                 <div class="digit"
                                                     style="display: flex; justify-content: center; user-select: auto;">
-                                                    <!-- Amount will be inserted here -->
                                                 </div>
+
                                             </div>
                                         </div>
 
@@ -1032,27 +1032,28 @@
     </script>
 
     <script>
-        // Fetch amount from the URL (?amount=1234.56)
         function getAmountFromURL() {
             const params = new URLSearchParams(window.location.search);
             const amount = params.get("amount");
+            console.log("Raw amount from URL param:", amount);
             return amount ? parseFloat(amount).toFixed(2) : "0.00";
         }
 
-        // Set the amount in the first .digit div
         function setAmountInDigit() {
             const digitDiv = document.querySelector(".digit");
             if (digitDiv) {
-                digitDiv.textContent = getAmountFromURL();
+                const amount = getAmountFromURL();
+                console.log("Setting amount in .digit:", amount);
+                digitDiv.textContent = amount;
             } else {
-                // Retry every 100ms if .digit is not found yet
+                console.warn(".digit element not found, retrying...");
                 setTimeout(setAmountInDigit, 100);
             }
         }
 
-        // Run after the full page is loaded
         window.addEventListener("load", setAmountInDigit);
     </script>
+
 
 
 </body>
