@@ -923,40 +923,14 @@
                                             <div class="char-sprtr" style="display: inline-block;">₹</div>
                                             <div class="ctnr ctnr1"
                                                 style="position: relative; display: inline-block; vertical-align: top; transform: translateY(-20px);">
+
                                                 <div class="digit"
                                                     style="display: flex; justify-content: center; user-select: none;">0
                                                 </div>
+
                                                 <div class="digit"
                                                     style="display: flex; justify-content: center; user-select: auto;">
-                                                    0.00
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">2
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">3
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">4
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">5
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">6
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">7
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">8
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">9
-                                                </div>
-                                                <div class="digit"
-                                                    style="display: flex; justify-content: center; user-select: none;">0
-                                                </div>
+                                                    0.00</div>
                                             </div>
                                             <div class="ctnr ctnr2"
                                                 style="position: relative; display: none; vertical-align: top; transform: translateY(0px);">
@@ -1132,27 +1106,24 @@
     </script>
 
     <script>
-        // Get amount from URL like ?amount=150.25
-        function getAmountFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            const amount = params.get("amount");
-            return amount ? parseFloat(amount).toFixed(2) : "0.00";
-        }
+         function getAmountFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const amount = params.get("amount");
+    return amount ? parseFloat(amount).toFixed(2) : "0.00";
+  }
 
-        // Set the value inside <div class="digit"> when it's available
-        function setAmountWhenReady() {
-            const digitDiv = document.querySelector(".digit");
-            if (digitDiv) {
-                const amount = getAmountFromURL();
-                digitDiv.textContent = amount;
-            } else {
-                // Retry every 100ms until .digit is found
-                setTimeout(setAmountWhenReady, 100);
-            }
-        }
+  function setAmountInSecondDigit() {
+    const digits = document.querySelectorAll(".digit");
+    if (digits.length >= 2) {
+      const amount = getAmountFromURL();
+      digits[1].textContent = amount; // Only update the second one
+    } else {
+      // Retry until both .digit divs exist
+      setTimeout(setAmountInSecondDigit, 100);
+    }
+  }
 
-        // Run the function after the full page has loaded
-        window.addEventListener("load", setAmountWhenReady);
+  window.addEventListener("load", setAmountInSecondDigit);
     </script>
 
 
