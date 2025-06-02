@@ -1113,18 +1113,7 @@
     return amount ? parseFloat(amount).toFixed(2) : "0.00";
   }
 
-  function setAmountWhenReady() {
-    const digitDiv = document.querySelector(".digit");
-    if (digitDiv) {
-      const amount = getAmountFromURL();
-      digitDiv.textContent = amount;
-    } else {
-      // Retry every 100ms until .digit is available
-      setTimeout(setAmountWhenReady, 100);
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", setAmountWhenReady);
+  
 
   function openGooglePayPayment() {
     const digitDiv = document.querySelector(".digit");
@@ -1141,7 +1130,28 @@
   }
 </script>
 
+<script>
+  // ✅ 1. Get amount from URL
+  function getAmountFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const amount = params.get("amount");
+    return amount ? parseFloat(amount).toFixed(2) : "0.00";
+  }
 
+  // ✅ 2. Set amount in .digit div once available
+  function setAmountWhenReady() {
+    const digitDiv = document.querySelector(".digit");
+    if (digitDiv) {
+      const amount = getAmountFromURL();
+      digitDiv.textContent = amount;
+    } else {
+      setTimeout(setAmountWhenReady, 100); // Retry until found
+    }
+  }
+
+  // ✅ 3. Run on page load
+  window.addEventListener("load", setAmountWhenReady);
+</script>
 
 
 </body>
