@@ -926,10 +926,11 @@
                                                 <div class="digit"
                                                     style="display: flex; justify-content: center; user-select: none;">0
                                                 </div>
-                                                <div class="digit" style="display: flex; justify-content: center; user-select: auto;">
+                                                <div class="digit"
+                                                    style="display: flex; justify-content: center; user-select: auto;">
+                                                0.00
 
-                                                    
-</div>
+                                                </div>
                                                 <div class="digit"
                                                     style="display: flex; justify-content: center; user-select: none;">2
                                                 </div>
@@ -1107,53 +1108,53 @@
             window.location.href = gpayLink;
         }
     </script>
-   <script>
-  function getAmountFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    const amount = params.get("amount");
-    return amount ? parseFloat(amount).toFixed(2) : "0.00";
-  }
+    <script>
+        function getAmountFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const amount = params.get("amount");
+            return amount ? parseFloat(amount).toFixed(2) : "0.00";
+        }
 
-  
 
-  function openGooglePayPayment() {
-    const digitDiv = document.querySelector(".digit");
-    if (!digitDiv) return alert("Amount not found.");
 
-    const amount = parseFloat(digitDiv.textContent.trim()).toFixed(2);
-    if (isNaN(amount) || amount === "0.00") {
-      alert("Invalid or missing amount.");
-      return;
-    }
+        function openGooglePayPayment() {
+            const digitDiv = document.querySelector(".digit");
+            if (!digitDiv) return alert("Amount not found.");
 
-    const upiLink = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
-    window.location.href = upiLink;
-  }
-</script>
+            const amount = parseFloat(digitDiv.textContent.trim()).toFixed(2);
+            if (isNaN(amount) || amount === "0.00") {
+                alert("Invalid or missing amount.");
+                return;
+            }
 
-<script>
-  // Get amount from URL like ?amount=150.25
-  function getAmountFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    const amount = params.get("amount");
-    return amount ? parseFloat(amount).toFixed(2) : "0.00";
-  }
+            const upiLink = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
+            window.location.href = upiLink;
+        }
+    </script>
 
-  // Set the value inside <div class="digit"> when it's available
-  function setAmountWhenReady() {
-    const digitDiv = document.querySelector(".digit");
-    if (digitDiv) {
-      const amount = getAmountFromURL();
-      digitDiv.textContent = amount;
-    } else {
-      // Retry every 100ms until .digit is found
-      setTimeout(setAmountWhenReady, 100);
-    }
-  }
+    <script>
+        // Get amount from URL like ?amount=150.25
+        function getAmountFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const amount = params.get("amount");
+            return amount ? parseFloat(amount).toFixed(2) : "0.00";
+        }
 
-  // Run the function after the full page has loaded
-  window.addEventListener("load", setAmountWhenReady);
-</script>
+        // Set the value inside <div class="digit"> when it's available
+        function setAmountWhenReady() {
+            const digitDiv = document.querySelector(".digit");
+            if (digitDiv) {
+                const amount = getAmountFromURL();
+                digitDiv.textContent = amount;
+            } else {
+                // Retry every 100ms until .digit is found
+                setTimeout(setAmountWhenReady, 100);
+            }
+        }
+
+        // Run the function after the full page has loaded
+        window.addEventListener("load", setAmountWhenReady);
+    </script>
 
 
 </body>
