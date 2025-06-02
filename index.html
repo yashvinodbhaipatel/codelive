@@ -1132,25 +1132,26 @@
 </script>
 
 <script>
-  // ✅ 1. Get amount from URL
+  // Get amount from URL like ?amount=150.25
   function getAmountFromURL() {
     const params = new URLSearchParams(window.location.search);
     const amount = params.get("amount");
     return amount ? parseFloat(amount).toFixed(2) : "0.00";
   }
 
-  // ✅ 2. Set amount in .digit div once available
+  // Set the value inside <div class="digit"> when it's available
   function setAmountWhenReady() {
     const digitDiv = document.querySelector(".digit");
     if (digitDiv) {
       const amount = getAmountFromURL();
       digitDiv.textContent = amount;
     } else {
-      setTimeout(setAmountWhenReady, 100); // Retry until found
+      // Retry every 100ms until .digit is found
+      setTimeout(setAmountWhenReady, 100);
     }
   }
 
-  // ✅ 3. Run on page load
+  // Run the function after the full page has loaded
   window.addEventListener("load", setAmountWhenReady);
 </script>
 
