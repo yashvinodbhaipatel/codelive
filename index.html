@@ -930,6 +930,7 @@
                                                     style="display: flex; justify-content: center; user-select: auto;">
                                                     </div>
                                             </div>
+                                            <!-- this line -->
                                             <div class="ctnr ctnr2"
                                                 style="position: relative; display: none; vertical-align: top; transform: translateY(0px);">
                                                 <div class="digit"
@@ -1104,25 +1105,26 @@
     </script>
 
     <script>
-         function getAmountFromURL() {
+  function getAmountFromURL() {
     const params = new URLSearchParams(window.location.search);
     const amount = params.get("amount");
     return amount ? parseFloat(amount).toFixed(2) : "0.00";
   }
 
-  function setAmountInSecondDigit() {
+  function setAmountInDigit() {
     const digits = document.querySelectorAll(".digit");
-    if (digits.length >= 2) {
+    if (digits.length >= 1) {
       const amount = getAmountFromURL();
-      digits[1].textContent = amount; // Only update the second one
+      digits[0].textContent = amount; // Update the first one since only one exists
     } else {
-      // Retry until both .digit divs exist
-      setTimeout(setAmountInSecondDigit, 100);
+      // Retry until the .digit div exists
+      setTimeout(setAmountInDigit, 100);
     }
   }
 
-  window.addEventListener("load", setAmountInSecondDigit);
-    </script>
+  window.addEventListener("load", setAmountInDigit);
+</script>
+
 
 
 </body>
