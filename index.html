@@ -1106,32 +1106,39 @@
             window.location.href = gpayLink;
         }
     </script>
-    <script>
+   <script>
+  // Get amount from URL like ?amount=150.25
   function getAmountFromURL() {
     const params = new URLSearchParams(window.location.search);
     const amount = params.get("amount");
     return amount ? parseFloat(amount).toFixed(2) : "0.00";
   }
 
-  function openGooglePayPayment() {
-    const amount = getAmountFromURL();
-    if (amount === "0.00") {
-      alert("Invalid or missing amount in URL.");
-      return;
-    }
- document.addEventListener("DOMContentLoaded", function () {
+  // Set .digit value from URL on page load
+  document.addEventListener("DOMContentLoaded", function () {
     const amount = getAmountFromURL();
     const digitDiv = document.querySelector(".digit");
     if (digitDiv) {
       digitDiv.textContent = amount;
     }
   });
-    const gpayLink = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
 
-    // Redirect to UPI payment link
-    window.location.href = gpayLink;
+  // Open UPI app with amount from .digit
+  function openGooglePayPayment() {
+    const digitDiv = document.querySelector(".digit");
+    if (!digitDiv) return alert("Amount not found.");
+
+    const amount = parseFloat(digitDiv.textContent.trim()).toFixed(2);
+    if (isNaN(amount) || amount === "0.00") {
+      alert("Invalid or missing amount.");
+      return;
+    }
+
+    const upiLink = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
+    window.location.href = upiLink;
   }
 </script>
+
 
 
 </body>
