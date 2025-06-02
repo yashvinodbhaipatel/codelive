@@ -922,13 +922,9 @@
                                             style="position: relative; overflow: hidden; height: 20px;">
                                             <div class="char-sprtr" style="display: inline-block;">₹</div>
 
-                                           <!-- Your existing digit box (optional, if still needed) -->
-<div class="ctnr ctnr1"
-     style="position: relative; display: inline-block; vertical-align: top; transform: translateY(-20px);">
-  <div class="digit"
-       style="display: flex; justify-content: center; user-select: auto;">
-  </div>
-</div>
+                                            <label id="amountLabel" style="font-weight: bold; font-size: 18px;">
+                                                Amount: ₹<span id="amountValue">0.00</span>
+                                            </label>
                                         </div>
 
                                         <div class="inset-0 hidden">₹100</div>
@@ -1031,34 +1027,34 @@
         }
     </script>
 
-   <script>
-  function getAmountFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    const amount = params.get("amount");
-    console.log("Raw amount from URL param:", amount);
-    return amount ? parseFloat(amount).toFixed(2) : "0.00";
-  }
+    <script>
+        function getAmountFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const amount = params.get("amount");
+            console.log("Raw amount from URL param:", amount);
+            return amount ? parseFloat(amount).toFixed(2) : "0.00";
+        }
 
-  function setAmountInUI() {
-    const amount = getAmountFromURL();
+        function setAmountInUI() {
+            const amount = getAmountFromURL();
 
-    // Update .digit if available
-    const digitDiv = document.querySelector(".digit");
-    if (digitDiv) {
-      digitDiv.textContent = amount;
-    }
+            // Update .digit if available
+            const digitDiv = document.querySelector(".digit");
+            if (digitDiv) {
+                digitDiv.textContent = amount;
+            }
 
-    // Update label span if available
-    const labelSpan = document.getElementById("amountValue");
-    if (labelSpan) {
-      labelSpan.textContent = amount;
-    }
+            // Update label span if available
+            const labelSpan = document.getElementById("amountValue");
+            if (labelSpan) {
+                labelSpan.textContent = amount;
+            }
 
-    
-  }
 
-  window.addEventListener("DOMContentLoaded", setAmountInUI);
-</script>
+        }
+
+        window.addEventListener("DOMContentLoaded", setAmountInUI);
+    </script>
 
 
 </body>
