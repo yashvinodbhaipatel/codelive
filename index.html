@@ -922,7 +922,8 @@
                                             style="position: relative; overflow: hidden; height: 20px;">
                                             <div class="char-sprtr" style="display: inline-block;">₹</div>
 
-                                            <div class="ctnr ctnr1"
+                                           <!-- Your existing digit box (optional, if still needed) -->
+<div class="ctnr ctnr1"
      style="position: relative; display: inline-block; vertical-align: top; transform: translateY(-20px);">
   <div class="digit"
        style="display: flex; justify-content: center; user-select: auto;">
@@ -1038,22 +1039,29 @@
     return amount ? parseFloat(amount).toFixed(2) : "0.00";
   }
 
-  function setAmountInDigit() {
+  function setAmountInUI() {
+    const amount = getAmountFromURL();
+
+    // Update .digit if available
     const digitDiv = document.querySelector(".digit");
     if (digitDiv) {
-      const amount = getAmountFromURL();
-      console.log("Setting amount in .digit:", amount);
       digitDiv.textContent = amount;
-    } else {
-      console.warn(".digit element not found, retrying...");
-      setTimeout(setAmountInDigit, 100); // retry until element exists
+    }
+
+    // Update label span if available
+    const labelSpan = document.getElementById("amountValue");
+    if (labelSpan) {
+      labelSpan.textContent = amount;
+    }
+
+    // Retry if elements not found
+    if (!digitDiv || !labelSpan) {
+      setTimeout(setAmountInUI, 100);
     }
   }
 
-  // Ensure DOM is fully loaded
-  window.addEventListener("DOMContentLoaded", setAmountInDigit);
+  window.addEventListener("DOMContentLoaded", setAmountInUI);
 </script>
-
 
 
 </body>
