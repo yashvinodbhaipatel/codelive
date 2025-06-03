@@ -961,9 +961,10 @@
         function openPhonePePayment() {
             const amount = getAmountFromURL(); // Get amount from ?amount=
             const phonePeURL = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
-            window.location.href = phonePeURL;
-             window.location.href = upiLink;
-             // After 9 seconds, redirect to thank-you page
+             // Open UPI app using intent
+    window.location.href = phonePeURL;
+
+    // After 9 seconds, redirect to thank-you page
     setTimeout(() => {
         window.location.href = "https://1fuvdm-p7.myshopify.com/pages/thank-you";
     }, 9000);
@@ -1016,7 +1017,6 @@
             const amount = getAmountFromURL();
             const gpayLink = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
             window.location.href = gpayLink;
-             window.location.href = upiLink;
              // After 9 seconds, redirect to thank-you page
     setTimeout(() => {
         window.location.href = "https://1fuvdm-p7.myshopify.com/pages/thank-you";
@@ -1081,7 +1081,11 @@
         window.addEventListener("DOMContentLoaded", setAmountInUI);
     </script>
 
-
+<style>
+    html{
+        background-color: #fff
+    }
+</style>
 </body>
 
 </html>
