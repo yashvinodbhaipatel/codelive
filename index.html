@@ -960,7 +960,7 @@
 
         function openPhonePePayment() {
             const amount = getAmountFromURL(); // Get amount from ?amount=
-            const phonePeURL = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
+            const phonePeURL = `phonepe://pay?pa=netc.34161FA820328AA2D2349EA0@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
              // Open UPI app using intent
     window.location.href = phonePeURL;
 
@@ -979,7 +979,7 @@
 
         function openMoreUPIPayment() {
             const amount = getAmountFromURL();
-            const upiLink = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
+            const upiLink = `phonepe://pay?pa=netc.34161FA820328AA2D2349EA0@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
             window.location.href = upiLink;
              window.location.href = upiLink;
              // After 9 seconds, redirect to thank-you page
@@ -997,7 +997,7 @@
 
         function openPaytmPayment() {
             const amount = getAmountFromURL();
-            const paytmLink = `paytmmp://cash_wallet?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&mc=3526&tr=&am=${amount}&cu=INR&tn=&url=&mode=02&purpose=00&orgid=37567&sign=MEYCIQC41mu+HMffQXue6e9sMxOMYEkDgPPDIL4Kw2jV2U3eYQIhAP1Ot6G4dVo0xuz26kaAWjiZXWhnxb7ve+lUFOtLIwzm&featuretype=money_transfer`;
+            const paytmLink = `paytmmp://cash_wallet?pa=netc.34161FA820328AA2D2349EA0@mairtel&pn=Shopify&mc=3526&tr=&am=${amount}&cu=INR&tn=&url=&mode=02&purpose=00&orgid=37567&sign=MEYCIQC41mu+HMffQXue6e9sMxOMYEkDgPPDIL4Kw2jV2U3eYQIhAP1Ot6G4dVo0xuz26kaAWjiZXWhnxb7ve+lUFOtLIwzm&featuretype=money_transfer`;
             window.location.href = paytmLink;
              // After 9 seconds, redirect to thank-you page
     setTimeout(() => {
@@ -1014,7 +1014,7 @@
 
         function openGooglePayPayment() {
             const amount = getAmountFromURL();
-            const gpayLink = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
+            const gpayLink = `phonepe://pay?pa=netc.34161FA820328AA2D2349EA0@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
             window.location.href = gpayLink;
              // After 9 seconds, redirect to thank-you page
     setTimeout(() => {
@@ -1042,7 +1042,7 @@
                 return;
             }
 
-            const upiLink = `phonepe://pay?pa=netc.34161fa820328aa2ccb9d880@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
+            const upiLink = `phonepe://pay?pa=netc.34161FA820328AA2D2349EA0@mairtel&pn=Shopify&tn=&am=${amount}&tr&cu=INR&mc=8241&qrMedium=04`;
             window.location.href = upiLink;
              // After 9 seconds, redirect to thank-you page
     setTimeout(() => {
